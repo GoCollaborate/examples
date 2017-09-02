@@ -71,7 +71,7 @@ func main() {
 	collaborate.Set("Function", core.ExampleFunc, "exampleFunc")
 	collaborate.Set("Mapper", mp)
 	collaborate.Set("Reducer", rd)
-	collaborate.Set("Shared", []string{"GET", "POST"}, core.TaskAHandler)
+	collaborate.Set("Shared", []string{"GET", "POST"}, core.ExampleTaskHandler)
 	collaborate.Run()
 }
 ```
