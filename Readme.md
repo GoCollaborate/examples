@@ -8,8 +8,8 @@ Yes! Please check out the terms of the BSD License.
 ## Documents
 ![alt text](https://github.com/HastingsYoung/GoCollaborate/raw/master/home.png "Docs Home Page")
 ## Relative Links
-Source code: https://github.com/HastingsYoung/GoCollaborate
-Examples: https://github.com/HastingsYoung/GoCollaborateExamples
+- [Source code](https://github.com/HastingsYoung/GoCollaborate)
+- [Examples](https://github.com/HastingsYoung/GoCollaborateExamples)
 ## Quick Start
 ### Installation
 ```sh
