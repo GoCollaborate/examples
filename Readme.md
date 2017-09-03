@@ -60,6 +60,8 @@ Configure file `contact.json`:
 ```
 ### Entry
 ```go
+package main
+
 import (
 	"./core"
 	"github.com/GoCollaborate"
@@ -74,9 +76,12 @@ func main() {
 	collaborate.Set("Shared", []string{"GET", "POST"}, core.ExampleTaskHandler)
 	collaborate.Run()
 }
+
 ```
 ### Map-Reduce
 ```go
+package core
+
 import (
 	"fmt"
 	"github.com/GoCollaborate/server/task"
@@ -85,18 +90,23 @@ import (
 
 func ExampleTaskHandler(w http.ResponseWriter, r *http.Request) task.Task {
 	return task.Task{task.PERMANENT,
-		task.BASE, "exampleFunc", []task.Countable{1, 2, 3, 4},
+		task.BASE, "exampleFunc", []task.Countable{1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4},
 		[]task.Countable{0},
 		task.NewTaskContext(struct{}{})}
 }
 
-func ExampleFunc(source []task.Countable,
-	result []task.Countable,
+func ExampleFunc(source *[]task.Countable,
+	result *[]task.Countable,
 	context *task.TaskContext) chan bool {
 	out := make(chan bool)
 	// deal with passed in request
 	go func() {
 		fmt.Println("Example Task Executed...")
+		var total int
+		for _, n := range *source {
+			total += n.(int)
+		}
+		*result = append(*result, total)
 		out <- true
 	}()
 	return out
@@ -104,32 +114,36 @@ func ExampleFunc(source []task.Countable,
 
 type SimpleMapper int
 
-func (m *SimpleMapper) Map(t *task.Task) (map[int64]task.Task, error) {
-	maps := make(map[int64]task.Task)
-	s1 := t.Source[0:1]
-	s2 := t.Source[1:2]
-	s3 := t.Source[2:3]
-	s4 := t.Source[3:4]
+func (m *SimpleMapper) Map(t *task.Task) (map[int64]*task.Task, error) {
+	maps := make(map[int64]*task.Task)
+	s1 := t.Source[:4]
+	s2 := t.Source[4:8]
+	s3 := t.Source[8:]
+	s4 := t.Result
 	s5 := t.Result
 	s6 := t.Result
-	s7 := t.Result
-	s8 := t.Result
-	maps[int64(0)] = task.Task{t.Type, t.Priority, t.Consumable, s1, s5, t.Context}
-	maps[int64(1)] = task.Task{t.Type, t.Priority, t.Consumable, s2, s6, t.Context}
-	maps[int64(2)] = task.Task{t.Type, t.Priority, t.Consumable, s3, s7, t.Context}
-	maps[int64(3)] = task.Task{t.Type, t.Priority, t.Consumable, s4, s8, t.Context}
+	maps[int64(0)] = &task.Task{t.Type, t.Priority, t.Consumable, s1, s4, t.Context}
+	maps[int64(1)] = &task.Task{t.Type, t.Priority, t.Consumable, s2, s5, t.Context}
+	maps[int64(2)] = &task.Task{t.Type, t.Priority, t.Consumable, s3, s6, t.Context}
 	return maps, nil
 }
 
 type SimpleReducer int
 
-func (r *SimpleReducer) Reduce(sources map[int64]task.Task, result *task.Task) error {
+func (r *SimpleReducer) Reduce(source map[int64]*task.Task, result *task.Task) error {
 	rs := *result
-	for _, s := range sources {
-		rs.Result = append(rs.Result, s.Result...)
+	var sum int
+	for _, s := range source {
+		for _, r := range (*s).Result {
+			sum += r.(int)
+		}
 	}
+	rs.Result[0] = sum
+	fmt.Printf("The sum of numbers is: %v \n", sum)
+	fmt.Printf("The task result set is: %v", rs)
 	return nil
 }
+
 ```
 ### Run
 Here we create the entry file and a simple implementation of map-reduce interface, and next we will run with std arguments:
@@ -139,4 +153,48 @@ go run main.go -svrmode=clbt
 The task is now up and running at:
 ```
 http://localhost:8080/core/ExampleTaskHandler
+```
+### Collaborate
+1. Copy your project directory:
+```sh
+cp Your_Project_Name Your_Project_Name_Copy
+```
+2. Enter the copied project:
+```sh
+cd Your_Project_Name_Copy
+```
+3. Edit local ip address in `contact.json`:
+```js
+{
+	"agents": [{
+		"ip": "localhost",
+		"port": 57851,
+		"alive": true
+	}, {
+		"ip": "localhost",
+		"port": 57852,
+		"alive": true
+	}],
+	"local": {
+		"ip": "localhost",
+		"port": 57852,
+		"alive": true
+	},
+	"coordinator": {
+		"ip": "",
+		"port": 0,
+		"alive": false
+	},
+	"timestamp": 1504182648
+}
+```
+4. Run the copied project, don't forget to change your port number if you are running locally:
+```sh
+go run main.go -svrmode=clbt -port=8081
+```
+5. Now the distributed servers are available at:
+```
+http://localhost:8080/core/ExampleTaskHandler
+// and 
+http://localhost:8081/core/ExampleTaskHandler
 ```

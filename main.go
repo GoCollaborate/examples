@@ -8,9 +8,9 @@ import (
 func main() {
 	mp := new(core.SimpleMapper)
 	rd := new(core.SimpleReducer)
-	collaborate.Set("Function", core.FuncA, "funcA")
+	collaborate.Set("Function", core.ExampleFunc, "exampleFunc")
 	collaborate.Set("Mapper", mp)
 	collaborate.Set("Reducer", rd)
-	collaborate.Set("Shared", []string{"GET", "POST"}, core.TaskAHandler)
+	collaborate.Set("Shared", []string{"GET", "POST"}, core.ExampleTaskHandler)
 	collaborate.Run()
 }
