@@ -7,7 +7,7 @@ GoCollaborate absorbs the best practice experience from popular distributed serv
 Yes! Please check out the terms of the BSD License.
 ## Contribution
 This project is currently under development, please feel free to fork it and report issues!
-## Documents(In Construction...)
+## Documents (In Construction...)
 ![alt text](https://github.com/HastingsYoung/GoCollaborate/raw/master/home.png "Docs Home Page")
 ## Relative Links
 - [Source code](https://github.com/HastingsYoung/GoCollaborate)
