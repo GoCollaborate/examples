@@ -12,7 +12,11 @@ This project is currently under development, please feel free to fork it and rep
 ## Relative Links
 - [Source code](https://github.com/HastingsYoung/GoCollaborate)
 - [Examples](https://github.com/HastingsYoung/GoCollaborateExamples)
-## Updates
+## Updates (Please note that no downward compability will be guarantee before the formal version 1.0.0 release)
+### 0.1.6
+- Support task-specific mapper and reducer
+- Update example documents
+- Repair bugs in coordinator mode
 ### 0.1.5
 - Refine logging format
 - Support automatic garbage collection for hash functions
@@ -79,8 +83,8 @@ func main() {
 	mp := new(core.SimpleMapper)
 	rd := new(core.SimpleReducer)
 	collaborate.Set("Function", core.ExampleFunc, "exampleFunc")
-	collaborate.Set("Mapper", mp)
-	collaborate.Set("Reducer", rd)
+	collaborate.Set("Mapper", mp, "core.ExampleTaskHandler.Mapper")
+	collaborate.Set("Reducer", rd, "core.ExampleTaskHandler.Reducer")
 	collaborate.Set("Shared", []string{"GET", "POST"}, core.ExampleTaskHandler)
 	collaborate.Run()
 }
@@ -100,7 +104,7 @@ func ExampleTaskHandler(w http.ResponseWriter, r *http.Request) task.Task {
 	return task.Task{task.PERMANENT,
 		task.BASE, "exampleFunc", []task.Countable{1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4},
 		[]task.Countable{0},
-		task.NewTaskContext(struct{}{})}
+		task.NewTaskContext(struct{}{}), "core.ExampleTaskHandler.Mapper", "core.ExampleTaskHandler.Reducer"}
 }
 
 func ExampleFunc(source *[]task.Countable,
@@ -130,9 +134,9 @@ func (m *SimpleMapper) Map(t *task.Task) (map[int64]*task.Task, error) {
 	s4 := t.Result
 	s5 := t.Result
 	s6 := t.Result
-	maps[int64(0)] = &task.Task{t.Type, t.Priority, t.Consumable, s1, s4, t.Context}
-	maps[int64(1)] = &task.Task{t.Type, t.Priority, t.Consumable, s2, s5, t.Context}
-	maps[int64(2)] = &task.Task{t.Type, t.Priority, t.Consumable, s3, s6, t.Context}
+	maps[int64(0)] = &task.Task{t.Type, t.Priority, t.Consumable, s1, s4, t.Context, t.Mapper, t.Reducer}
+	maps[int64(1)] = &task.Task{t.Type, t.Priority, t.Consumable, s2, s5, t.Context, t.Mapper, t.Reducer}
+	maps[int64(2)] = &task.Task{t.Type, t.Priority, t.Consumable, s3, s6, t.Context, t.Mapper, t.Reducer}
 	return maps, nil
 }
 
