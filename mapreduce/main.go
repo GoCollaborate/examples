@@ -1,0 +1,33 @@
+package main
+
+import (
+	"./core"
+	"github.com/GoCollaborate"
+	"github.com/GoCollaborate/server/chainer"
+)
+
+func main() {
+	// example 01
+	simplmp := new(core.SimpleMapper)
+	chainmp := chainer.DefaultChainMapper(0)
+	chainmp.Append(simplmp, simplmp, simplmp)
+
+	rd := new(core.SimpleReducer)
+
+	collaborate.Set("Function", core.ExampleFunc, "exampleFunc")
+	collaborate.Set("Mapper", simplmp, "core.ExampleTaskHandler.SimpleMapper")
+	collaborate.Set("Mapper", chainmp, "core.ExampleTaskHandler.ChainMapper")
+	collaborate.Set("Reducer", rd, "core.ExampleTaskHandler.SimpleReducer")
+	collaborate.Set("Shared", []string{"GET", "POST"}, core.ExampleTaskHandler01)
+
+	// example 02
+	advmp := new(core.AdvancedMapper)
+	advrd := new(core.AdvancedReducer)
+	pipmp := chainer.DefaultPipelineMapper()
+	pipmp.Set(advmp, advrd, advmp)
+
+	collaborate.Set("Mapper", pipmp, "core.ExampleTaskHandler.PipelineMapper")
+	collaborate.Set("Reducer", advrd, "core.ExampleTaskHandler.AdvancedReducer")
+	collaborate.Set("Shared", []string{"GET", "POST"}, core.ExampleTaskHandler02)
+	collaborate.Run()
+}
