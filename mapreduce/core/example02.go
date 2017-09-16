@@ -6,12 +6,18 @@ import (
 	"net/http"
 )
 
-func ExampleTaskHandler02(w http.ResponseWriter, r *http.Request) task.Task {
-	return task.Task{task.PERMANENT,
+func ExampleJobHandler02(w http.ResponseWriter, r *http.Request) *task.Job {
+	job := task.MakeJob()
+	job.Tasks(&task.Task{task.PERMANENT,
 		task.BASE, "exampleFunc",
-		[]task.Countable{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21},
+		[]task.Countable{1, 2, 3, 4,
+			5, 6, 7, 8,
+			9, 10, 11, 12,
+			13, 14, 15, 16,
+			17, 18, 19, 20, 21},
 		[]task.Countable{0},
-		task.NewTaskContext(struct{}{}), "core.ExampleTaskHandler.PipelineMapper", "core.ExampleTaskHandler.AdvancedReducer"}
+		task.NewTaskContext(struct{}{}), "core.ExampleTask.PipelineMapper", "core.ExampleTask.AdvancedReducer", 0})
+	return job
 }
 
 type AdvancedReducer int
@@ -38,7 +44,7 @@ func (m *AdvancedMapper) Map(t *task.Task) (map[int64]*task.Task, error) {
 			continue
 		}
 
-		maps[int64(i)] = &task.Task{t.Type, t.Priority, t.Consumable, []task.Countable{s}, []task.Countable{s}, t.Context, "core.ExampleTaskHandler.AdvancedMapper", t.Reducer}
+		maps[int64(i)] = &task.Task{t.Type, t.Priority, t.Consumable, []task.Countable{s}, []task.Countable{s}, t.Context, "core.ExampleTask.AdvancedMapper", t.Reducer, t.Stage}
 	}
 	return maps, nil
 }

@@ -6,14 +6,23 @@ import (
 	"net/http"
 )
 
-func ExampleTaskHandler01(w http.ResponseWriter, r *http.Request) task.Task {
-	return task.Task{task.PERMANENT,
+func ExampleJobHandler01(w http.ResponseWriter, r *http.Request) *task.Job {
+	job := task.MakeJob()
+	job.Tasks(&task.Task{task.PERMANENT,
 		task.BASE, "exampleFunc",
-		[]task.Countable{1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
-			1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
-			1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4},
+		[]task.Countable{1, 2, 3, 4,
+			1, 2, 3, 4, 1, 2, 3, 4,
+			1, 2, 3, 4, 1, 2, 3, 4,
+			1, 2, 3, 4, 1, 2, 3, 4,
+			1, 2, 3, 4, 1, 2, 3, 4,
+			1, 2, 3, 4, 1, 2, 3, 4,
+			1, 2, 3, 4, 1, 2, 3, 4,
+			1, 2, 3, 4, 1, 2, 3, 4,
+			1, 2, 3, 4, 1, 2, 3, 4,
+			1, 2, 3, 4},
 		[]task.Countable{0},
-		task.NewTaskContext(struct{}{}), "core.ExampleTaskHandler.ChainMapper", "core.ExampleTaskHandler.SimpleReducer"}
+		task.NewTaskContext(struct{}{}), "core.ExampleTask.ChainMapper", "core.ExampleTask.SimpleReducer", 0})
+	return job
 }
 
 func ExampleFunc(source *[]task.Countable,
@@ -48,7 +57,7 @@ func (m *SimpleMapper) Map(t *task.Task) (map[int64]*task.Task, error) {
 	s5 := t.Result
 	s6 := t.Result
 
-	index, err := t.Context.Get("index")
+	index, err := t.Context.Get("__index")
 
 	if err != nil {
 		return maps, err
@@ -56,9 +65,9 @@ func (m *SimpleMapper) Map(t *task.Task) (map[int64]*task.Task, error) {
 
 	i := index.(int64)
 
-	maps[i] = &task.Task{t.Type, t.Priority, t.Consumable, s1, s4, t.Context, "core.ExampleTaskHandler.SimpleMapper", t.Reducer}
-	maps[i+1] = &task.Task{t.Type, t.Priority, t.Consumable, s2, s5, t.Context, "core.ExampleTaskHandler.SimpleMapper", t.Reducer}
-	maps[i+2] = &task.Task{t.Type, t.Priority, t.Consumable, s3, s6, t.Context, "core.ExampleTaskHandler.SimpleMapper", t.Reducer}
+	maps[i] = &task.Task{t.Type, t.Priority, t.Consumable, s1, s4, t.Context, "core.ExampleTask.SimpleMapper", t.Reducer, t.Stage}
+	maps[i+1] = &task.Task{t.Type, t.Priority, t.Consumable, s2, s5, t.Context, "core.ExampleTask.SimpleMapper", t.Reducer, t.Stage}
+	maps[i+2] = &task.Task{t.Type, t.Priority, t.Consumable, s3, s6, t.Context, "core.ExampleTask.SimpleMapper", t.Reducer, t.Stage}
 	return maps, nil
 }
 
