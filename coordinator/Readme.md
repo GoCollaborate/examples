@@ -100,7 +100,7 @@ The service provider should register their endpoint as per they expose for exter
 		"id": "",
 		"type": "registry",
 		"attributes": {
-			"agents": [{
+			"Cards": [{
 				"ip": "192.168.0.1",
 				"port": 4444,
 				"alive": true
