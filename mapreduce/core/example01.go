@@ -8,20 +8,18 @@ import (
 
 func ExampleJobHandler01(w http.ResponseWriter, r *http.Request) *task.Job {
 	job := task.MakeJob()
-	job.Tasks(&task.Task{task.PERMANENT,
+	job.Tasks(&task.Task{task.SHORT,
 		task.BASE, "exampleFunc",
-		[]task.Countable{1, 2, 3, 4,
-			1, 2, 3, 4, 1, 2, 3, 4,
-			1, 2, 3, 4, 1, 2, 3, 4,
-			1, 2, 3, 4, 1, 2, 3, 4,
-			1, 2, 3, 4, 1, 2, 3, 4,
-			1, 2, 3, 4, 1, 2, 3, 4,
-			1, 2, 3, 4, 1, 2, 3, 4,
-			1, 2, 3, 4, 1, 2, 3, 4,
-			1, 2, 3, 4, 1, 2, 3, 4,
-			1, 2, 3, 4},
+		[]task.Countable{1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
+			1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
+			1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
+			1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
+			1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4},
 		[]task.Countable{0},
-		task.NewTaskContext(struct{}{}), "core.ExampleTask.ChainMapper", "core.ExampleTask.SimpleReducer", 0})
+		task.NewTaskContext(struct{}{}), 0})
+	// map twice, reduce once
+	job.Stacks("core.ExampleTask.SimpleMapper", "core.ExampleTask.SimpleMapper",
+		"core.ExampleTask.SimpleReducer")
 	return job
 }
 
@@ -44,45 +42,46 @@ func ExampleFunc(source *[]task.Countable,
 
 type SimpleMapper int
 
-func (m *SimpleMapper) Map(t *task.Task) (map[int64]*task.Task, error) {
-	maps := make(map[int64]*task.Task)
-	length := len(t.Source)
-	l1 := length / 3
-	l2 := length / 3 * 2
+func (m *SimpleMapper) Map(inmaps map[int]*task.Task) (map[int]*task.Task, error) {
+	var (
+		s1      []task.Countable
+		s2      []task.Countable
+		s3      []task.Countable
+		s4      []task.Countable
+		s5      []task.Countable
+		s6      []task.Countable
+		gap     = len(inmaps)
+		outmaps = make(map[int]*task.Task)
+	)
+	for k, t := range inmaps {
+		var (
+			sgap = len(t.Source)
+		)
+		s1 = t.Source[:sgap/3]
+		s2 = t.Source[sgap/3 : sgap*2/3]
+		s3 = t.Source[sgap*2/3:]
+		s4 = t.Result
+		s5 = t.Result
+		s6 = t.Result
 
-	s1 := t.Source[:l1]
-	s2 := t.Source[l1:l2]
-	s3 := t.Source[l2:]
-	s4 := t.Result
-	s5 := t.Result
-	s6 := t.Result
-
-	index, err := t.Context.Get("__index")
-
-	if err != nil {
-		return maps, err
+		outmaps[(k+1)*gap] = &task.Task{t.Type, t.Priority, t.Consumable, s1, s4, t.Context, t.Stage}
+		outmaps[(k+1)*gap+1] = &task.Task{t.Type, t.Priority, t.Consumable, s2, s5, t.Context, t.Stage}
+		outmaps[(k+1)*gap+2] = &task.Task{t.Type, t.Priority, t.Consumable, s3, s6, t.Context, t.Stage}
 	}
 
-	i := index.(int64)
-
-	maps[i] = &task.Task{t.Type, t.Priority, t.Consumable, s1, s4, t.Context, "core.ExampleTask.SimpleMapper", t.Reducer, t.Stage}
-	maps[i+1] = &task.Task{t.Type, t.Priority, t.Consumable, s2, s5, t.Context, "core.ExampleTask.SimpleMapper", t.Reducer, t.Stage}
-	maps[i+2] = &task.Task{t.Type, t.Priority, t.Consumable, s3, s6, t.Context, "core.ExampleTask.SimpleMapper", t.Reducer, t.Stage}
-	return maps, nil
+	return outmaps, nil
 }
 
 type SimpleReducer int
 
-func (r *SimpleReducer) Reduce(source map[int64]*task.Task, result *task.Task) error {
-	rs := *result
+func (r *SimpleReducer) Reduce(maps map[int]*task.Task) (map[int]*task.Task, error) {
 	var sum int
-	for _, s := range source {
+	for _, s := range maps {
 		for _, r := range (*s).Result {
 			sum += r.(int)
 		}
 	}
-	rs.Result[0] = sum
-	fmt.Printf("The sum of numbers is: %v \n", sum)
-	fmt.Printf("The task result set is: %v", rs)
-	return nil
+	fmt.Printf("The sum of numbers is: %v \n\n", sum)
+	fmt.Printf("The task set is: %v", maps)
+	return maps, nil
 }
