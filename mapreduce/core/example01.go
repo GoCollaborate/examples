@@ -3,6 +3,7 @@ package core
 import (
 	"fmt"
 	"github.com/GoCollaborate/artifacts/task"
+	"github.com/GoCollaborate/wrappers/taskHelper"
 	"net/http"
 )
 
@@ -17,8 +18,9 @@ func ExampleJobHandler01(w http.ResponseWriter, r *http.Request) *task.Job {
 			1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4},
 		[]task.Countable{0},
 		task.NewTaskContext(struct{}{}), 0})
-	// map twice, reduce once
-	job.Stacks("core.ExampleTask.SimpleMapper", "core.ExampleTask.SimpleMapper",
+	// map once, reduce once, repeat
+	job.Stacks("core.ExampleTask.SimpleMapper",
+		"core.ExampleTask.SimpleReducer", "core.ExampleTask.SimpleMapper",
 		"core.ExampleTask.SimpleReducer")
 	return job
 }
@@ -43,33 +45,7 @@ func ExampleFunc(source *[]task.Countable,
 type SimpleMapper int
 
 func (m *SimpleMapper) Map(inmaps map[int]*task.Task) (map[int]*task.Task, error) {
-	var (
-		s1      []task.Countable
-		s2      []task.Countable
-		s3      []task.Countable
-		s4      []task.Countable
-		s5      []task.Countable
-		s6      []task.Countable
-		gap     = len(inmaps)
-		outmaps = make(map[int]*task.Task)
-	)
-	for k, t := range inmaps {
-		var (
-			sgap = len(t.Source)
-		)
-		s1 = t.Source[:sgap/3]
-		s2 = t.Source[sgap/3 : sgap*2/3]
-		s3 = t.Source[sgap*2/3:]
-		s4 = t.Result
-		s5 = t.Result
-		s6 = t.Result
-
-		outmaps[(k+1)*gap] = &task.Task{t.Type, t.Priority, t.Consumable, s1, s4, t.Context, t.Stage}
-		outmaps[(k+1)*gap+1] = &task.Task{t.Type, t.Priority, t.Consumable, s2, s5, t.Context, t.Stage}
-		outmaps[(k+1)*gap+2] = &task.Task{t.Type, t.Priority, t.Consumable, s3, s6, t.Context, t.Stage}
-	}
-
-	return outmaps, nil
+	return taskHelper.Slice(inmaps, 3), nil
 }
 
 type SimpleReducer int
