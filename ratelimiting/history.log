@@ -1,0 +1,7 @@
+2017/10/05 09:16:29  [NORMAL]:   The read in timestamp conflicts with local clock
+2017/10/05 09:16:29  [NORMAL]:   Case Identifier:
+2017/10/05 09:16:29  [LIST]:     [-] [GoCollaborateStandardCase]
+2017/10/05 09:16:29  [NORMAL]:   Local Address:
+2017/10/05 09:16:29  [LIST]:     [-] [10.13.118.95]
+2017/10/05 09:16:29  [NORMAL]:   Job Linked:
+2017/10/05 09:16:29  [LIST]:     [-] [/core/ExampleJobHandler]

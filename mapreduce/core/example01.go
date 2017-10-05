@@ -2,7 +2,7 @@ package core
 
 import (
 	"fmt"
-	"github.com/GoCollaborate/server/task"
+	"github.com/GoCollaborate/artifacts/task"
 	"net/http"
 )
 

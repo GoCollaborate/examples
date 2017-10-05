@@ -2,8 +2,8 @@ package core
 
 import (
 	"fmt"
-	"github.com/GoCollaborate/server/task"
-	"github.com/GoCollaborate/server/taskutils"
+	"github.com/GoCollaborate/artifacts/task"
+	"github.com/GoCollaborate/wrappers/taskHelper"
 	"net/http"
 )
 
@@ -98,7 +98,7 @@ func (r *AdvancedReducer) Reduce(maps map[int]*task.Task) (map[int]*task.Task, e
 	)
 
 	// return the sorted keys
-	for _, k := range taskutils.Keys(maps) {
+	for _, k := range taskHelper.Keys(maps) {
 		s := maps[k]
 		sortedSet = append(sortedSet, s)
 		for _, r := range (*s).Result {

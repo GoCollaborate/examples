@@ -1,10 +1,95 @@
-2017/10/01 12:05:38  [NORMAL]:   Case Identifier:
-2017/10/01 12:05:38  [LIST]:     [-] [GoCollaborateStandardCase]
-2017/10/01 12:05:38  [NORMAL]:   Local Address:
-2017/10/01 12:05:38  [LIST]:     [-] [192.168.1.109]
-2017/10/01 12:05:38  [LIST]:     [-] [localhost:57851 Alive]
-2017/10/01 12:05:38  [LIST]:     [-] [localhost:57851 Alive]
-2017/10/01 12:05:38  [NORMAL]:   Job Linked:
-2017/10/01 12:05:38  [LIST]:     [-] [/core/ExampleJobHandler]
-
-
+2017/10/05 09:18:10  [NORMAL]:   The read in timestamp conflicts with local clock
+2017/10/05 09:18:10  [NORMAL]:   Case Identifier:
+2017/10/05 09:18:10  [LIST]:     [-] [GoCollaborateStandardCase]
+2017/10/05 09:18:10  [NORMAL]:   Local Address:
+2017/10/05 09:18:10  [LIST]:     [-] [10.13.118.95]
+2017/10/05 09:18:10  [NORMAL]:   Job Linked:
+2017/10/05 09:18:10  [LIST]:     [-] [/core/ExampleJobHandler]
+2017/10/05 08:59:01  [PROGRESS]: Waiting for task responses[0/3]
+2017/10/05 08:59:01  [NORMAL]:   Worker6:, Task Level:0
+2017/10/05 08:59:01  [NORMAL]:   Worker3:, Task Level:0
+2017/10/05 08:59:01  [NORMAL]:   Worker9:, Task Level:0
+2017/10/05 08:59:01  [PROGRESS]: Waiting for task responses[1/3]
+2017/10/05 08:59:01  [PROGRESS]: Waiting for task responses[2/3]
+2017/10/05 08:59:01  [PROGRESS]: Waiting for task responses[3/3]
+2017/10/05 08:59:01  [PROGRESS]: All task responses collected
+2017/10/05 08:59:01  [PROGRESS]: Waiting for task responses[0/3]
+2017/10/05 08:59:01  [NORMAL]:   Worker8:, Task Level:0
+2017/10/05 08:59:01  [NORMAL]:   Worker3:, Task Level:0
+2017/10/05 08:59:01  [NORMAL]:   Worker2:, Task Level:0
+2017/10/05 08:59:01  [PROGRESS]: Waiting for task responses[1/3]
+2017/10/05 08:59:01  [PROGRESS]: Waiting for task responses[2/3]
+2017/10/05 08:59:01  [PROGRESS]: Waiting for task responses[3/3]
+2017/10/05 08:59:01  [PROGRESS]: All task responses collected
+2017/10/05 08:59:02  [PROGRESS]: Waiting for task responses[0/3]
+2017/10/05 08:59:02  [NORMAL]:   Worker5:, Task Level:0
+2017/10/05 08:59:02  [NORMAL]:   Worker0:, Task Level:0
+2017/10/05 08:59:02  [NORMAL]:   Worker6:, Task Level:0
+2017/10/05 08:59:02  [PROGRESS]: Waiting for task responses[1/3]
+2017/10/05 08:59:02  [PROGRESS]: Waiting for task responses[2/3]
+2017/10/05 08:59:02  [PROGRESS]: Waiting for task responses[3/3]
+2017/10/05 08:59:02  [PROGRESS]: All task responses collected
+2017/10/05 08:59:03  [PROGRESS]: Waiting for task responses[0/3]
+2017/10/05 08:59:03  [NORMAL]:   Worker4:, Task Level:0
+2017/10/05 08:59:03  [NORMAL]:   Worker5:, Task Level:0
+2017/10/05 08:59:03  [NORMAL]:   Worker7:, Task Level:0
+2017/10/05 08:59:03  [PROGRESS]: Waiting for task responses[1/3]
+2017/10/05 08:59:03  [PROGRESS]: Waiting for task responses[2/3]
+2017/10/05 08:59:03  [PROGRESS]: Waiting for task responses[3/3]
+2017/10/05 08:59:03  [PROGRESS]: All task responses collected
+2017/10/05 08:59:03  [PROGRESS]: Waiting for task responses[0/3]
+2017/10/05 08:59:03  [NORMAL]:   Worker0:, Task Level:0
+2017/10/05 08:59:03  [NORMAL]:   Worker6:, Task Level:0
+2017/10/05 08:59:04  [PROGRESS]: Waiting for task responses[1/3]
+2017/10/05 08:59:03  [NORMAL]:   Worker7:, Task Level:0
+2017/10/05 08:59:04  [PROGRESS]: Waiting for task responses[2/3]
+2017/10/05 08:59:04  [PROGRESS]: Waiting for task responses[3/3]
+2017/10/05 08:59:04  [PROGRESS]: All task responses collected
+2017/10/05 08:59:04  [PROGRESS]: Waiting for task responses[0/3]
+2017/10/05 08:59:04  [NORMAL]:   Worker9:, Task Level:0
+2017/10/05 08:59:04  [NORMAL]:   Worker6:, Task Level:0
+2017/10/05 08:59:04  [NORMAL]:   Worker2:, Task Level:0
+2017/10/05 08:59:05  [PROGRESS]: Waiting for task responses[1/3]
+2017/10/05 08:59:05  [PROGRESS]: Waiting for task responses[2/3]
+2017/10/05 08:59:05  [PROGRESS]: Waiting for task responses[3/3]
+2017/10/05 08:59:05  [PROGRESS]: All task responses collected
+2017/10/05 08:59:09  [PROGRESS]: Waiting for task responses[0/3]
+2017/10/05 08:59:09  [NORMAL]:   Worker5:, Task Level:0
+2017/10/05 08:59:09  [NORMAL]:   Worker8:, Task Level:0
+2017/10/05 08:59:09  [NORMAL]:   Worker9:, Task Level:0
+2017/10/05 08:59:09  [PROGRESS]: Waiting for task responses[1/3]
+2017/10/05 08:59:09  [PROGRESS]: Waiting for task responses[2/3]
+2017/10/05 08:59:09  [PROGRESS]: Waiting for task responses[3/3]
+2017/10/05 08:59:09  [PROGRESS]: All task responses collected
+2017/10/05 08:59:10  [PROGRESS]: Waiting for task responses[0/3]
+2017/10/05 08:59:10  [NORMAL]:   Worker9:, Task Level:0
+2017/10/05 08:59:10  [NORMAL]:   Worker5:, Task Level:0
+2017/10/05 08:59:10  [NORMAL]:   Worker0:, Task Level:0
+2017/10/05 08:59:10  [PROGRESS]: Waiting for task responses[1/3]
+2017/10/05 08:59:10  [PROGRESS]: Waiting for task responses[2/3]
+2017/10/05 08:59:10  [PROGRESS]: Waiting for task responses[3/3]
+2017/10/05 08:59:10  [PROGRESS]: All task responses collected
+2017/10/05 08:59:11  [PROGRESS]: Waiting for task responses[0/3]
+2017/10/05 08:59:11  [NORMAL]:   Worker7:, Task Level:0
+2017/10/05 08:59:11  [NORMAL]:   Worker2:, Task Level:0
+2017/10/05 08:59:11  [NORMAL]:   Worker3:, Task Level:0
+2017/10/05 08:59:11  [PROGRESS]: Waiting for task responses[1/3]
+2017/10/05 08:59:11  [PROGRESS]: Waiting for task responses[2/3]
+2017/10/05 08:59:11  [PROGRESS]: Waiting for task responses[3/3]
+2017/10/05 08:59:11  [PROGRESS]: All task responses collected
+2017/10/05 08:59:12  [PROGRESS]: Waiting for task responses[0/3]
+2017/10/05 08:59:12  [NORMAL]:   Worker7:, Task Level:0
+2017/10/05 08:59:12  [NORMAL]:   Worker0:, Task Level:0
+2017/10/05 08:59:12  [NORMAL]:   Worker4:, Task Level:0
+2017/10/05 08:59:12  [PROGRESS]: Waiting for task responses[1/3]
+2017/10/05 08:59:12  [PROGRESS]: Waiting for task responses[2/3]
+2017/10/05 08:59:12  [PROGRESS]: Waiting for task responses[3/3]
+2017/10/05 08:59:12  [PROGRESS]: All task responses collected
+2017/10/05 08:59:13  [PROGRESS]: Waiting for task responses[0/3]
+2017/10/05 08:59:13  [NORMAL]:   Worker8:, Task Level:0
+2017/10/05 08:59:13  [NORMAL]:   Worker2:, Task Level:0
+2017/10/05 08:59:13  [PROGRESS]: Waiting for task responses[1/3]
+2017/10/05 08:59:13  [PROGRESS]: Waiting for task responses[2/3]
+2017/10/05 08:59:13  [NORMAL]:   Worker6:, Task Level:0
+2017/10/05 08:59:13  [PROGRESS]: Waiting for task responses[3/3]
+2017/10/05 08:59:13  [PROGRESS]: All task responses collected
