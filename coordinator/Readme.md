@@ -16,7 +16,7 @@ func main() {
 ### Run
 Running GoCollaborate server in Coordinator mode is very simple, you just go:
 ```sh
-go run main.go -svrmode=cdnt
+go run main.go -mode=cdnt
 ```
 The restful services api is available at: 
 ```
