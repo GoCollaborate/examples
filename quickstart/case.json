@@ -1,1 +1,1 @@
-{"caseid":"GoCollaborateStandardCase","cards":{"localhost:57852":{"ip":"localhost","port":57852,"alive":true}},"timestamp":1507280265,"local":{"ip":"localhost","port":57852,"alive":true},"coordinator":{"ip":"","port":0,"alive":false}}
+{"caseid":"GoCollaborateStandardCase","cards":{"localhost:57852":{"ip":"localhost","port":57852,"alive":true}},"timestamp":1507280265,"local":{"ip":"localhost","port":57852,"alive":true},"coordinator":{"ip":"localhost","port":8081,"alive":true}}
