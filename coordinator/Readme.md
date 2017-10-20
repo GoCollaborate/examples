@@ -22,59 +22,119 @@ The restful services api is available at:
 ```
 http://localhost:8080/services
 ```
+
+### Extended Basic Types
+#### Parameter
+```
+{
+	"type": <ParamType>,
+	"description": <String>,
+	"constraints": [<Constraint>],
+	"required": <Bool>
+}
+```
+#### Card
+```
+{
+	"ip": <String>,
+	"port": <Int>,
+	"alive": <Bool>,
+	"api": <String>
+}
+```
+#### Mode
+
+| Name        | Value           | Description  |
+|:------------- |:-------------| :----- |
+| ClbtModeNormal      | 0 | Working mode |
+| ClbtModeOnlyRegister | 1 | Collaborator only registers service, service is not accessible until it has been changed to ClbtModeNormal |
+| ClbtModeOnlySubscribe | 2 | Subscriber only subscribes to collaborator service at coordinator, no service redirection will be provided |
+| LBModeRandom | 3 | Assign tasks as per weighted probability |
+| LBModeLeastActive | 4 | Assign tasks to least active responders |
+| LBModeRoundRobin | 5 | Assign tasks sequentially based on the order of collaborator |
+| LBModeIPHash | 6 | Assign tasks based on the hash value of subscriber IP |
+
+#### ParamType
+
+| Name        | Value           | 
+|:------------- |:-------------|
+| ArgTypeInteger | "integer" |
+| ArgTypeNumber | "number" | 
+| ArgTypeString | "string" |
+| ArgTypeObject | "object" | 
+| ArgTypeBoolean | "boolean" | 
+| ArgTypeNull | "null" | 
+| ArgTypeArray | "array" | 
+
+#### Constraint
+```
+{
+	"key": <ConstraintKey>,
+	"value": <Interface{}>
+}
+```
+##### ConstraintKey
+| Name        | Value           | 
+|:------------- |:-------------|
+| ConstraintTypeMax | "maximum" |
+| ConstraintTypeMin | "minimum" | 
+| ConstraintTypeXMin | "exclusiveMinimum" |
+| ConstraintTypeXMax | "exclusiveMaximum" | 
+| ConstraintTypeUniqueItems | "uniqueItems" | 
+| ConstraintTypeMaxProperties | "maxProperties" | 
+| ConstraintTypeMinProperties | "minProperties" | 
+| ConstraintTypeMaxLength | "maxLength" |
+| ConstraintTypeMinLength | "minLength" | 
+| ConstraintTypePattern | "pattern" |
+| ConstraintTypeMaxItems | "maxItems" | 
+| ConstraintTypeMinItems | "minItems" | 
+| ConstraintTypeEnum | "enum" | 
+| ConstraintTypeAllOf | "allOf" | 
+| ConstraintTypeAnyOf | "anyOf" | 
+| ConstraintTypeOneOf | "oneOf" | 
+
+#### Registry
+```
+{
+	"cards": [<Card>]
+}
+```
+
+#### Subscription
+```
+{
+	"token": <String>
+}
+```
+
+#### Heartbeat
+```
+{
+	"card": <Card>
+}
+```
+
 ### Create Service
-**POST**: `/services`
+- **POST**: `/services`
 
-**Content-Type**: `application/json`
+- **Headers**:
+	- Content-Type: `application/json`
 
-**Body**:
+**Body** (required):
 ```
 {
 	"data": [{
 		"type": "service",
 		"attributes": {
-			"description": "test description",
-			"parameters": [{
-				"type": "string",
-				"description": "test argument string",
-				"constraints": [{
-					"key": "maxLength",
-					"value": 10
-				}, {
-					"key": "minLength",
-					"value": 5
-				}],
-				"required": false
-			}, {
-				"type": "integer",
-				"description": "test argument integer",
-				"constraints": [{
-					"key": "maximum",
-					"value": 1000
-				}, {
-					"key": "minimum",
-					"value": 100
-				}],
-				"required": true
-			}, {
-				"type": "array",
-				"description": "test argument array",
-				"constraints": [{
-					"key": "maxItems",
-					"value": 1000
-				}, {
-					"key": "uniqueItems",
-					"value": true
-				}],
-				"required": true
-			}],
-			"registers": [],
-			"subscribers": [],
-			"mode": "RPCServerModeNormal",
-			"load_balance_mode": "RPCServerModeRandomLoadBalance",
-			"dependencies": [],
-			"version": "1.0",
-			"platform_version": "golang1.8.1"
+			"description": <String>,
+			"parameters": [<Parameter>],
+			"registers": [<Card>],
+			"subscribers": [<String>],
+			"mode": <Mode>,
+			"load_balance_mode": <Mode>,
+			"dependencies": [<String>],
+			"version": <String>,
+			"platform_version": <String>
 		}
 	}]
 }
@@ -82,30 +142,25 @@ http://localhost:8080/services
 
 ### Get Services
 #### Bulk
-**GET**: `/services`
+- **GET**: `/services`
 #### Single
-**GET**: `/services/{serviceid}`
+- **GET**: `/services/{serviceid}`
 
 ### Register Service
 The service provider should register their endpoint as per they expose for external access.
 
-**POST**: `/services/{serviceid}/registry`
+- **POST**: `/services/{serviceid}/registry`
 
-**Content-Type**: "application/json"
+- **Headers**:
+	- Content-Type: `application/json`
 
-**Body**:
+**Body** (required):
 ```
 {
 	"data": [{
-		"id": "",
+		"id": <String/"">,
 		"type": "registry",
-		"attributes": {
-			"Cards": [{
-				"ip": "192.168.0.1",
-				"port": 4444,
-				"alive": true
-			}]
-		}
+		"attributes": <Registry>
 	}]
 }
 ```
@@ -113,16 +168,18 @@ The service provider should register their endpoint as per they expose for exter
 ### Subscribe Service
 The service consumer should subscribe their interest as per they request for.
 
-**POST**: `/services/{serviceid}/subscription`
+- **POST**: `/services/{serviceid}/subscription`
 
-**Content-Type**: "application/json"
+- **Headers**:
+	- Content-Type: `application/json`
 
 **Body**:
 ```
 {
 	"data": [{
-		"id": "",
-		"type": "subscription"
+		"id": <String/"">,
+		"type": "subscription",
+		"attributes": <Subscription>
 	}]
 }
 ```
@@ -131,31 +188,45 @@ The service consumer should subscribe their interest as per they request for.
 The service provider should deregister their endpoint as per they terminate the provision.
 
 #### Single Deletion
-**DELETE**: `/services/{serviceid}/registry/{ip}/{port}`
-
-**Content-Type**: "application/json"
+- **DELETE**: `/services/{serviceid}/registry/{ip}/{port}`
 
 #### Bulk Deletion
-**DELETE**: `/services/{serviceid}/registry`
-
-**Content-Type**: "application/json"
+- **DELETE**: `/services/{serviceid}/registry`
 
 ### Unsubscribe Service
 The service consumer should unsubscribe their usage as per they terminate the dependencies.
 
 #### Single Deletion
-**DELETE**: `/services/{serviceid}/subscription/{token}`
-
-**Content-Type**: "application/json"
+- **DELETE**: `/services/{serviceid}/subscription/{token}`
 
 #### Bulk Deletion
-**DELETE**: `/services/{serviceid}/subscription`
-
-**Content-Type**: "application/json"
+- **DELETE**: `/services/{serviceid}/subscription`
 
 ### Delete Service
 Delete a service if it is no longer required.
 
-**DELETE**: `/services/{serviceid}`
+- **DELETE**: `/services/{serviceid}`
 
-**Content-Type**: "application/json"
+### Heart Beat
+Send server heartbeats to Coordinator.
+
+- **POST**: `/services/heartbeat`
+
+- **Headers**:
+	- Content-Type: `application/json`
+
+**Body**:
+```
+{
+	"data": [{
+		"id": <String/"">,
+		"type": "subscription",
+		"attributes": <Heartbeat>
+	}]
+}
+```
+
+### Query Service
+Client launch request to call a service
+
+- **GET**: `/query/{srvid}/{token}`
