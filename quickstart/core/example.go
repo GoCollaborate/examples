@@ -11,28 +11,25 @@ func ExampleJobHandler(w http.ResponseWriter, r *http.Request) *task.Job {
 	job := task.MakeJob()
 	job.Tasks(&task.Task{task.SHORT,
 		task.BASE, "exampleFunc",
-		[]task.Countable{1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4},
-		[]task.Countable{0},
+		task.Collection{1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4},
+		task.Collection{0},
 		task.NewTaskContext(struct{}{}), 0})
 	job.Stacks("core.ExampleTask.Mapper", "core.ExampleTask.Reducer")
 	return job
 }
 
-func ExampleFunc(source *[]task.Countable,
-	result *[]task.Countable,
-	context *task.TaskContext) chan bool {
-	out := make(chan bool)
+func ExampleFunc(source *task.Collection,
+	result *task.Collection,
+	context *task.TaskContext) bool {
 	// deal with passed in request
-	go func() {
-		fmt.Println("Example Task Executed...")
-		var total int
-		for _, n := range *source {
-			total += n.(int)
-		}
-		*result = append(*result, total)
-		out <- true
-	}()
-	return out
+	fmt.Println("Example Task Executed...")
+	var total int
+	// the function will calculate the sum of source data
+	for _, n := range *source {
+		total += n.(int)
+	}
+	result.Append(total)
+	return true
 }
 
 type SimpleMapper int

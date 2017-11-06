@@ -1,20 +1,20 @@
-2017/10/22 01:27:38  [NORMAL]:   Case Identifier:
-2017/10/22 01:27:38  [LIST]:     [-] [GoCollaborateStandardCase]
-2017/10/22 01:27:38  [NORMAL]:   Cards:
-2017/10/22 01:27:38  [LIST]:     [-] [localhost:57852 Alive Seed]
-2017/10/22 01:27:38  [NORMAL]:   Local:
-2017/10/22 01:27:38  [LIST]:     [-] [172.20.0.44:57852 Alive Seed]
-2017/10/22 01:27:38  [NORMAL]:   Job Linked:
-2017/10/22 01:27:38  [LIST]:     [-] [/core/ExampleJobHandler]
-2017/10/22 01:27:40  [PROGRESS]: Waiting for task responses[0/3]
-2017/10/22 01:27:40  [NORMAL]:   Worker9:, Task Level:0
-2017/10/22 01:27:40  [NORMAL]:   Worker3:, Task Level:0
-2017/10/22 01:27:40  [NORMAL]:   Worker2:, Task Level:0
-2017/10/22 01:27:40  [PROGRESS]: Waiting for task responses[1/3]
-2017/10/22 01:27:40  [PROGRESS]: Waiting for task responses[2/3]
-2017/10/22 01:27:40  [PROGRESS]: Waiting for task responses[3/3]
-2017/10/22 01:27:40  [PROGRESS]: All task responses collected
-2017/10/22 01:25:58  [PROGRESS]: Waiting for task responses[0/3]
+2017/11/06 08:58:21  [NORMAL]:   Case Identifier:
+2017/11/06 08:58:21  [LIST]:     [-] [GoCollaborateStandardCase]
+2017/11/06 08:58:21  [NORMAL]:   Cards:
+2017/11/06 08:58:21  [LIST]:     [-] [localhost:57852 Alive Seed]
+2017/11/06 08:58:21  [NORMAL]:   Local:
+2017/11/06 08:58:21  [LIST]:     [-] [131.170.171.195:57852 Alive Seed]
+2017/11/06 08:58:21  [NORMAL]:   Job Linked:
+2017/11/06 08:58:21  [LIST]:     [-] [/core/ExampleJobHandler]
+2017/11/06 08:58:27  [PROGRESS]: Waiting for task responses[0/3]
+2017/11/06 08:58:27  [NORMAL]:   Worker9:, Task Level:0
+2017/11/06 08:58:27  [NORMAL]:   Worker0:, Task Level:0
+2017/11/06 08:58:27  [NORMAL]:   Worker2:, Task Level:0
+2017/11/06 08:58:27  [PROGRESS]: Waiting for task responses[1/3]
+2017/11/06 08:58:27  [PROGRESS]: Waiting for task responses[2/3]
+2017/11/06 08:58:27  [PROGRESS]: Waiting for task responses[3/3]
+2017/11/06 08:58:27  [PROGRESS]: All task responses collected
+/10/22 01:25:58  [PROGRESS]: Waiting for task responses[0/3]
 2017/10/22 01:25:58  [NORMAL]:   Worker0:, Task Level:0
 2017/10/22 01:25:58  [NORMAL]:   Worker1:, Task Level:0
 2017/10/22 01:25:58  [NORMAL]:   Worker6:, Task Level:0

@@ -16,39 +16,35 @@ func ExampleJobHandler(w http.ResponseWriter, r *http.Request) *task.Job {
 		raw  = []struct {
 			Balance float64
 		}{}
-		source = []task.Countable{}
+		source = task.Collection{}
 	)
 
 	ioHelper.FromPath(path).NewCSVOperator().Fill(&raw)
 
 	for _, r := range raw {
-		source = append(source, task.Countable(r.Balance))
+		source.Append(task.Countable(r.Balance))
 	}
 
 	job.Tasks(&task.Task{task.SHORT,
 		task.BASE, "exampleFunc",
 		source,
-		[]task.Countable{},
+		task.Collection{},
 		task.NewTaskContext(struct{}{}), 0})
 	job.Stacks("core.ExampleTask.Mapper", "core.ExampleTask.Reducer")
 	return job
 }
 
-func ExampleFunc(source *[]task.Countable,
-	result *[]task.Countable,
-	context *task.TaskContext) chan bool {
-	out := make(chan bool)
+func ExampleFunc(source *task.Collection,
+	result *task.Collection,
+	context *task.TaskContext) bool {
 	// deal with passed in request
-	go func() {
-		fmt.Println("Example Task Executed...")
-		var total float64
-		for _, n := range *source {
-			total += n.(float64)
-		}
-		*result = append(*result, total)
-		out <- true
-	}()
-	return out
+	fmt.Println("Example Task Executed...")
+	var total float64
+	for _, n := range *source {
+		total += n.(float64)
+	}
+	*result = append(*result, total)
+	return true
 }
 
 type SimpleMapper int
