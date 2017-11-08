@@ -1,0 +1,23 @@
+{
+	"caseid": "GoCollaborateStandardCase",
+	"cards": {
+		"localhost:57852": {
+			"ip": "localhost",
+			"port": 57852,
+			"alive": true,
+			"seed": true
+		}
+	},
+	"timestamp": 1508619931,
+	"local": {
+		"ip": "localhost",
+		"port": 57852,
+		"alive": true,
+		"seed": true
+	},
+	"coordinator": {
+		"ip": "localhost",
+		"port": 0,
+		"alive": false
+	}
+}

@@ -5,16 +5,19 @@ import (
 	"github.com/GoCollaborate/artifacts/task"
 	"github.com/GoCollaborate/wrappers/ioHelper"
 	"github.com/GoCollaborate/wrappers/taskHelper"
+	"io"
+	"io/ioutil"
 	"net/http"
+	"os"
 )
 
-// The following example shows how to caculate a total bill from a csv file
+// The following example shows how to collect HTML contents from the given urls
 func ExampleJobHandler(w http.ResponseWriter, r *http.Request) *task.Job {
 	var (
 		job  = task.MakeJob()
 		path = "./data.csv"
 		raw  = []struct {
-			Balance float64
+			URL string
 		}{}
 		source = task.Collection{}
 	)
@@ -22,7 +25,7 @@ func ExampleJobHandler(w http.ResponseWriter, r *http.Request) *task.Job {
 	ioHelper.FromPath(path).NewCSVOperator().Fill(&raw)
 
 	for _, r := range raw {
-		source.Append(task.Countable(r.Balance))
+		source.Append(task.Countable(r.URL))
 	}
 
 	job.Tasks(&task.Task{task.SHORT,
@@ -37,13 +40,26 @@ func ExampleJobHandler(w http.ResponseWriter, r *http.Request) *task.Job {
 func ExampleFunc(source *task.Collection,
 	result *task.Collection,
 	context *task.TaskContext) bool {
-	// deal with passed in request
-	fmt.Println("Example Task Executed...")
-	var total float64
+	var text = task.Collection{}
+
 	for _, n := range *source {
-		total += n.(float64)
+		var (
+			bytes []byte
+			resp  *http.Response
+			err   error
+		)
+		resp, err = http.Get(n.(string))
+		if err != nil {
+			break
+		}
+		bytes, err = ioutil.ReadAll(resp.Body)
+		if err != nil {
+			break
+		}
+		text = append(text, task.Countable(string(bytes)))
 	}
-	*result = append(*result, total)
+
+	*result = append(*result, text...)
 	return true
 }
 
@@ -57,12 +73,18 @@ func (m *SimpleMapper) Map(inmaps map[int]*task.Task) (map[int]*task.Task, error
 type SimpleReducer int
 
 func (r *SimpleReducer) Reduce(maps map[int]*task.Task) (map[int]*task.Task, error) {
-	var sum float64
+	var (
+		sum  int
+		text string = ""
+	)
 	for _, s := range maps {
+		sum += len((*s).Result)
 		for _, r := range (*s).Result {
-			sum += r.(float64)
+			text += r.(string)
 		}
 	}
-	fmt.Printf("The sum of balance is: %v \n", sum)
+	file, _ := os.Create("./websites.txt")
+	io.WriteString(file, text)
+	fmt.Printf("The sites visited: %v \n", sum)
 	return maps, nil
 }
