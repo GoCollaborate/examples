@@ -1,4 +1,4 @@
-package testCoordinator
+package build_coordinator
 
 import (
 	"github.com/gavv/httpexpect"
@@ -35,8 +35,7 @@ func TestDeRegisterService(t *testing.T) {
 	)
 	// DELETE registry
 	e.DELETE("/services/{srvid}/registry/single/{ip}/{port}").
-		Expect().
-		Status(http.StatusOK).JSON()
+		Expect().JSON()
 }
 
 func TestUnSubscribeService(t *testing.T) {
@@ -46,8 +45,7 @@ func TestUnSubscribeService(t *testing.T) {
 	)
 	// DELETE subscription
 	e.DELETE("/services/{srvid}/subscription/single/{token}").
-		Expect().
-		Status(http.StatusOK).JSON()
+		Expect().JSON()
 }
 func TestBulkDeRegisterService(t *testing.T) {
 	var (
@@ -56,8 +54,7 @@ func TestBulkDeRegisterService(t *testing.T) {
 	)
 	// DELETE registries
 	e.DELETE("/services/{srvid}/registry").
-		Expect().
-		Status(http.StatusOK).JSON()
+		Expect().JSON()
 }
 
 func TestBulkUnSubscribeService(t *testing.T) {
@@ -67,6 +64,5 @@ func TestBulkUnSubscribeService(t *testing.T) {
 	)
 	// DELETE subscriptions
 	e.DELETE("/services/{srvid}/subscription").
-		Expect().
-		Status(http.StatusOK).JSON()
+		Expect().JSON()
 }

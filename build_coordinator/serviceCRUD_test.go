@@ -1,4 +1,4 @@
-package testCoordinator
+package build_coordinator
 
 import (
 	"github.com/gavv/httpexpect"
@@ -13,8 +13,7 @@ func TestGetService(t *testing.T) {
 	)
 	// services GET
 	e.GET("/services/{srvid}").
-		Expect().
-		Status(http.StatusOK).JSON()
+		Expect().JSON()
 }
 
 func TestGetServices(t *testing.T) {
@@ -94,7 +93,7 @@ func TestPostServices(t *testing.T) {
 		WithHeader("Content-Type", "application/json").
 		WithJSON(createServiceJSON).
 		Expect().
-		Status(http.StatusOK).JSON()
+		Status(http.StatusCreated).JSON()
 	repos.Schema(schema)
 }
 
@@ -130,7 +129,7 @@ func TestAlterServices(t *testing.T) {
 		WithHeader("Content-Type", "application/json").
 		WithJSON(alterServiceJSON).
 		Expect().
-		Status(http.StatusOK).JSON()
+		Status(http.StatusAccepted).JSON()
 	repos.Schema(schema)
 }
 
@@ -141,6 +140,5 @@ func TestDeleteService(t *testing.T) {
 	)
 	// DELETE service
 	e.DELETE("/services/{srvid}").
-		Expect().
-		Status(http.StatusOK).JSON()
+		Expect().JSON()
 }
