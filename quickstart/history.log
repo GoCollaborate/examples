@@ -1,11 +1,11 @@
-2017/11/12 06:47:07  [NORMAL]:   Case Identifier:
-2017/11/12 06:47:07  [LIST]:     [-] [GoCollaborateStandardCase]
-2017/11/12 06:47:07  [NORMAL]:   Cards:
-2017/11/12 06:47:07  [LIST]:     [-] [localhost:57852 Alive Seed]
-2017/11/12 06:47:07  [NORMAL]:   Local:
-2017/11/12 06:47:07  [LIST]:     [-] [131.170.170.36:57852 Alive Seed]
-2017/11/12 06:47:07  [NORMAL]:   Job Linked:
-2017/11/12 06:47:07  [LIST]:     [-] [/core/ExampleJobHandler]
+2017/11/12 07:41:23  [NORMAL]:   Case Identifier:
+2017/11/12 07:41:23  [LIST]:     [-] [GoCollaborateStandardCase]
+2017/11/12 07:41:23  [NORMAL]:   Cards:
+2017/11/12 07:41:23  [LIST]:     [-] [localhost:57852 Alive Seed]
+2017/11/12 07:41:23  [NORMAL]:   Local:
+2017/11/12 07:41:23  [LIST]:     [-] [131.170.170.36:57852 Alive Seed]
+2017/11/12 07:41:23  [NORMAL]:   Job Linked:
+2017/11/12 07:41:23  [LIST]:     [-] [/core/ExampleJobHandler]
 2017/11/12 06:05:07  [LIST]:     [-] [localhost:57852 Alive Seed]
 /11/11 12:17:10  [NORMAL]:   Worker2:, Task Level:0
 2017/11/11 12:17:10  [NORMAL]:   Worker0:, Task Level:0

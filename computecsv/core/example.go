@@ -2,9 +2,9 @@ package core
 
 import (
 	"fmt"
-	"github.com/GoCollaborate/artifacts/task"
-	"github.com/GoCollaborate/wrappers/ioHelper"
-	"github.com/GoCollaborate/wrappers/taskHelper"
+	"github.com/GoCollaborate/src/artifacts/task"
+	"github.com/GoCollaborate/src/wrappers/ioHelper"
+	"github.com/GoCollaborate/src/wrappers/taskHelper"
 	"net/http"
 )
 

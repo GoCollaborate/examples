@@ -2,7 +2,7 @@ package main
 
 import (
 	"./core"
-	"github.com/GoCollaborate"
+	"github.com/GoCollaborate/src"
 )
 
 func main() {
