@@ -1,19 +1,20 @@
-2017/11/06 08:58:21  [NORMAL]:   Case Identifier:
-2017/11/06 08:58:21  [LIST]:     [-] [GoCollaborateStandardCase]
-2017/11/06 08:58:21  [NORMAL]:   Cards:
-2017/11/06 08:58:21  [LIST]:     [-] [localhost:57852 Alive Seed]
-2017/11/06 08:58:21  [NORMAL]:   Local:
-2017/11/06 08:58:21  [LIST]:     [-] [131.170.171.195:57852 Alive Seed]
-2017/11/06 08:58:21  [NORMAL]:   Job Linked:
-2017/11/06 08:58:21  [LIST]:     [-] [/core/ExampleJobHandler]
-2017/11/06 08:58:27  [PROGRESS]: Waiting for task responses[0/3]
-2017/11/06 08:58:27  [NORMAL]:   Worker9:, Task Level:0
-2017/11/06 08:58:27  [NORMAL]:   Worker0:, Task Level:0
-2017/11/06 08:58:27  [NORMAL]:   Worker2:, Task Level:0
-2017/11/06 08:58:27  [PROGRESS]: Waiting for task responses[1/3]
-2017/11/06 08:58:27  [PROGRESS]: Waiting for task responses[2/3]
-2017/11/06 08:58:27  [PROGRESS]: Waiting for task responses[3/3]
-2017/11/06 08:58:27  [PROGRESS]: All task responses collected
+2017/11/13 04:06:29  [NORMAL]:   Case Identifier:
+2017/11/13 04:06:29  [LIST]:     [-] [GoCollaborateStandardCase]
+2017/11/13 04:06:29  [NORMAL]:   Cards:
+2017/11/13 04:06:29  [LIST]:     [-] [localhost:57852 Alive Seed]
+2017/11/13 04:06:29  [NORMAL]:   Local:
+2017/11/13 04:06:29  [LIST]:     [-] [192.168.43.222:57852 Alive Seed]
+2017/11/13 04:06:29  [NORMAL]:   Job Linked:
+2017/11/13 04:06:29  [LIST]:     [-] [/core/ExampleJobHandler]
+2017/11/13 04:06:37  [PROGRESS]: Waiting for task responses[0/3]
+2017/11/13 04:06:37  [NORMAL]:   Worker1:, Task Level:0
+2017/11/13 04:06:37  [NORMAL]:   Worker5:, Task Level:0
+2017/11/13 04:06:37  [NORMAL]:   Worker2:, Task Level:0
+2017/11/13 04:06:37  [PROGRESS]: Waiting for task responses[1/3]
+2017/11/13 04:06:37  [PROGRESS]: Waiting for task responses[2/3]
+2017/11/13 04:06:37  [PROGRESS]: Waiting for task responses[3/3]
+2017/11/13 04:06:37  [PROGRESS]: All task responses collected
+
 /10/22 01:25:58  [PROGRESS]: Waiting for task responses[0/3]
 2017/10/22 01:25:58  [NORMAL]:   Worker0:, Task Level:0
 2017/10/22 01:25:58  [NORMAL]:   Worker1:, Task Level:0

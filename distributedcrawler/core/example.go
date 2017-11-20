@@ -25,7 +25,7 @@ func ExampleJobHandler(w http.ResponseWriter, r *http.Request) *task.Job {
 	ioHelper.FromPath(path).NewCSVOperator().Fill(&raw)
 
 	for _, r := range raw {
-		source.Append(task.Countable(r.URL))
+		source.Append(r.URL)
 	}
 
 	job.Tasks(&task.Task{task.SHORT,
