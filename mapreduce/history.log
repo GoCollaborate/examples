@@ -1,15 +1,15 @@
-2017/11/20 13:42:54  [NORMAL]:   Case Identifier:
-2017/11/20 13:42:54  [LIST]:     [-] [GoCollaborateStandardCase]
-2017/11/20 13:42:54  [NORMAL]:   Cards:
-2017/11/20 13:42:54  [LIST]:     [-] [localhost:57851 Terminated Non-Seed]
-2017/11/20 13:42:54  [LIST]:     [-] [localhost:57852 Alive Seed]
-2017/11/20 13:42:54  [NORMAL]:   Local:
-2017/11/20 13:42:54  [LIST]:     [-] [192.168.0.8:57852 Alive Seed]
-2017/11/20 13:42:54  [NORMAL]:   Job Linked:
-2017/11/20 13:42:54  [LIST]:     [-] [/core/ExampleJobHandler01]
-2017/11/20 13:42:54  [NORMAL]:   Job Linked:
-2017/11/20 13:42:54  [LIST]:     [-] [/core/ExampleJobHandler02]
-2017/11/20 13:43:11  [PROGRESS]: Waiting for task responses[0/3]
+2017/12/12 11:50:00  [NORMAL]:   Case Identifier:
+2017/12/12 11:50:00  [LIST]:     [-] [GoCollaborateStandardCase]
+2017/12/12 11:50:00  [NORMAL]:   Cards:
+2017/12/12 11:50:00  [LIST]:     [-] [localhost:57851 Terminated Non-Seed]
+2017/12/12 11:50:00  [LIST]:     [-] [localhost:57852 Alive Seed]
+2017/12/12 11:50:00  [NORMAL]:   Local:
+2017/12/12 11:50:00  [LIST]:     [-] [192.168.0.11:57852 Alive Seed]
+2017/12/12 11:50:00  [NORMAL]:   Job Linked:
+2017/12/12 11:50:00  [LIST]:     [-] [/core/ExampleJobHandler01]
+2017/12/12 11:50:00  [NORMAL]:   Job Linked:
+2017/12/12 11:50:00  [LIST]:     [-] [/core/ExampleJobHandler02]
+017/11/20 13:43:11  [PROGRESS]: Waiting for task responses[0/3]
 2017/11/20 13:43:11  [NORMAL]:   Worker7:, Task Level:0
 2017/11/20 13:43:11  [PROGRESS]: Waiting for task responses[1/3]
 2017/11/20 13:43:11  [NORMAL]:   Worker0:, Task Level:0

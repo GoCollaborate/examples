@@ -1,20 +1,20 @@
-2017/11/20 13:48:25  [NORMAL]:   Case Identifier:
-2017/11/20 13:48:25  [LIST]:     [-] [GoCollaborateStandardCase]
-2017/11/20 13:48:25  [NORMAL]:   Cards:
-2017/11/20 13:48:25  [LIST]:     [-] [192.168.0.8:57851 Alive Seed]
-2017/11/20 13:48:25  [LIST]:     [-] [localhost:57852 Terminated Seed]
-2017/11/20 13:48:25  [NORMAL]:   Local:
-2017/11/20 13:48:25  [LIST]:     [-] [192.168.0.8:57851 Alive Seed]
-2017/11/20 13:48:25  [NORMAL]:   Job Linked:
-2017/11/20 13:48:25  [LIST]:     [-] [/core/ExampleJobHandler]
-11/20 13:45:38  [ERROR]:    Dialing:
-%!(EXTRA context.deadlineExceededError=context deadline exceeded)
-2017/11/20 13:45:38  [WARN]:     Connection failed while bridging
-ponses[1/3]
-2017/11/20 13:40:56  [PROGRESS]: Waiting for task responses[2/3]
-2017/11/20 13:40:56  [PROGRESS]: Waiting for task responses[3/3]
-2017/11/20 13:40:56  [PROGRESS]: All task responses collected
-2017/11/20 13:41:07  [PROGRESS]: Waiting for task responses[0/3]
+2017/12/12 11:49:03  [NORMAL]:   Case Identifier:
+2017/12/12 11:49:03  [LIST]:     [-] [GoCollaborateStandardCase]
+2017/12/12 11:49:03  [NORMAL]:   Cards:
+2017/12/12 11:49:03  [LIST]:     [-] [192.168.0.11:57851 Alive Seed]
+2017/12/12 11:49:03  [NORMAL]:   Local:
+2017/12/12 11:49:03  [LIST]:     [-] [192.168.0.11:57851 Alive Seed]
+2017/12/12 11:49:03  [NORMAL]:   Job Linked:
+2017/12/12 11:49:03  [LIST]:     [-] [/core/ExampleJobHandler]
+2017/12/12 11:49:31  [PROGRESS]: Waiting for task responses[0/3]
+2017/12/12 11:49:31  [NORMAL]:   Worker6:, Task Level:0
+2017/12/12 11:49:31  [NORMAL]:   Worker4:, Task Level:0
+2017/12/12 11:49:31  [NORMAL]:   Worker8:, Task Level:0
+2017/12/12 11:49:31  [PROGRESS]: Waiting for task responses[1/3]
+2017/12/12 11:49:31  [PROGRESS]: Waiting for task responses[2/3]
+2017/12/12 11:49:31  [PROGRESS]: Waiting for task responses[3/3]
+2017/12/12 11:49:31  [PROGRESS]: All task responses collected
+k responses[0/3]
 2017/11/20 13:41:07  [NORMAL]:   Worker5:, Task Level:0
 2017/11/20 13:41:08  [PROGRESS]: Waiting for task responses[1/3]
 2017/11/20 13:41:08  [PROGRESS]: Waiting for task responses[2/3]
