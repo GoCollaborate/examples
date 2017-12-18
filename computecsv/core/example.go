@@ -9,7 +9,7 @@ import (
 )
 
 // The following example shows how to caculate a total bill from a csv file
-func ExampleJobHandler(w http.ResponseWriter, r *http.Request) *task.Job {
+func ExampleJobHandler(w http.ResponseWriter, r *http.Request, bg *task.Background) {
 	var (
 		job  = task.MakeJob()
 		path = "./data.csv"
@@ -21,6 +21,16 @@ func ExampleJobHandler(w http.ResponseWriter, r *http.Request) *task.Job {
 
 	ioHelper.FromPath(path).NewCSVOperator().Fill(&raw)
 
+	// reading data from file
+	// file, _ := os.Open(path)
+	// ioHelper.FromFile(file).NewCSVOperator().Fill(&data)
+
+	// reading data from bytes
+	// ioHelper.FromBytes([]byte(CSVFILE)).NewCSVOperator().Fill(&data)
+
+	// reading data from string
+	// ioHelper.FromString(CSVFILE).NewCSVOperator().Fill(&data)
+
 	for _, r := range raw {
 		source.Append(r.Balance)
 	}
@@ -31,7 +41,8 @@ func ExampleJobHandler(w http.ResponseWriter, r *http.Request) *task.Job {
 		task.Collection{},
 		task.NewTaskContext(struct{}{}), 0})
 	job.Stacks("core.ExampleTask.Mapper", "core.ExampleTask.Reducer")
-	return job
+
+	bg.Mount(job)
 }
 
 func ExampleFunc(source *task.Collection,
