@@ -7,22 +7,25 @@ import (
 	"net/http"
 )
 
-func ExampleJobHandler01(w http.ResponseWriter, r *http.Request) *task.Job {
+func ExampleJobHandler01(w http.ResponseWriter, r *http.Request, bg *task.Background) {
 	job := task.MakeJob()
-	job.Tasks(&task.Task{task.SHORT,
+	job.Tasks(&task.Task{
+		task.SHORT,
 		task.BASE, "exampleFunc",
-		task.Collection{1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
+		task.Collection{
+			1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
 			1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
 			1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
 			1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
-			1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4},
+			1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
+		},
 		task.Collection{0},
 		task.NewTaskContext(struct{}{}), 0})
 	// map once, reduce once, repeat
 	job.Stacks("core.ExampleTask.SimpleMapper",
 		"core.ExampleTask.SimpleReducer", "core.ExampleTask.SimpleMapper",
 		"core.ExampleTask.SimpleReducer")
-	return job
+	bg.Mount(job)
 }
 
 func ExampleFunc(source *task.Collection,
@@ -34,7 +37,7 @@ func ExampleFunc(source *task.Collection,
 	for _, n := range *source {
 		total += n.(int)
 	}
-	*result = append(*result, total)
+	result.Append(total)
 	return true
 }
 

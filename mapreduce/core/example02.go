@@ -7,46 +7,56 @@ import (
 	"net/http"
 )
 
-func ExampleJobHandler02(w http.ResponseWriter, r *http.Request) *task.Job {
+func ExampleJobHandler02(w http.ResponseWriter, r *http.Request, bg *task.Background) {
 	job := task.MakeJob()
 	job.Tasks(
-		&task.Task{task.SHORT,
+		&task.Task{
+			task.SHORT,
 			task.BASE, "exampleFunc",
-			task.Collection{1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
+			task.Collection{
+				1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
 				1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
 				1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
 				1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
-				1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4},
+				1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
+			},
+			task.Collection{0},
+			// stage 0
+			task.NewTaskContext(struct{}{}), 0},
+		&task.Task{
+			task.SHORT,
+			task.BASE, "exampleFunc",
+			task.Collection{
+				1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
+				1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
+				1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
+				1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
+				1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
+			},
 			task.Collection{0},
 			// stage 0
 			task.NewTaskContext(struct{}{}), 0},
 		&task.Task{task.SHORT,
 			task.BASE, "exampleFunc",
-			task.Collection{1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
+			task.Collection{
+				1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
 				1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
 				1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
 				1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
-				1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4},
-			task.Collection{0},
-			// stage 0
-			task.NewTaskContext(struct{}{}), 0},
-		&task.Task{task.SHORT,
-			task.BASE, "exampleFunc",
-			task.Collection{1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
-				1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
-				1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
-				1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
-				1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4},
+				1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
+			},
 			task.Collection{0},
 			// stage 1
 			task.NewTaskContext(struct{}{}), 1},
 		&task.Task{task.SHORT,
 			task.BASE, "exampleFunc",
-			task.Collection{1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
+			task.Collection{
+				1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
 				1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
 				1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
 				1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
-				1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4},
+				1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4,
+			},
 			task.Collection{0},
 			// stage 1
 			task.NewTaskContext(struct{}{}), 1})
@@ -54,7 +64,8 @@ func ExampleJobHandler02(w http.ResponseWriter, r *http.Request) *task.Job {
 	job.Stacks("core.ExampleTask.AdvancedMapper", "core.ExampleTask.AdvancedMapper", "core.ExampleTask.AdvancedReducer")
 	// map once, reduce twice at stage 1
 	job.Stacks("core.ExampleTask.AdvancedMapper", "core.ExampleTask.AdvancedReducer", "core.ExampleTask.AdvancedReducer")
-	return job
+
+	bg.Mount(job)
 }
 
 type AdvancedMapper int

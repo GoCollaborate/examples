@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-func ExampleJobHandler(w http.ResponseWriter, r *http.Request) *task.Job {
+func ExampleJobHandler(w http.ResponseWriter, r *http.Request, bg *task.Background) {
 	job := task.MakeJob()
 	job.Tasks(&task.Task{task.SHORT,
 		task.BASE, "exampleFunc",
@@ -15,7 +15,7 @@ func ExampleJobHandler(w http.ResponseWriter, r *http.Request) *task.Job {
 		task.Collection{0},
 		task.NewTaskContext(struct{}{}), 0})
 	job.Stacks("core.ExampleTask.Mapper", "core.ExampleTask.Reducer")
-	return job
+	bg.Mount(job)
 }
 
 func ExampleFunc(source *task.Collection,
@@ -27,7 +27,7 @@ func ExampleFunc(source *task.Collection,
 	for _, n := range *source {
 		total += n.(int)
 	}
-	*result = append(*result, total)
+	result.Append(total)
 	return true
 }
 

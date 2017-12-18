@@ -5,26 +5,51 @@ import (
 	"github.com/GoCollaborate/src/artifacts/task"
 	"github.com/GoCollaborate/src/wrappers/taskHelper"
 	"net/http"
+	"time"
 )
 
 func ExampleJobHandler(w http.ResponseWriter, r *http.Request, bg *task.Background) {
 	job := task.MakeJob()
+	delay := 5 * time.Second
 
-	job.Tasks(
-		&task.Task{
-			task.SHORT,
-			task.BASE,
-			"exampleFunc",
-			task.Collection{1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4},
-			task.Collection{0},
-			task.NewTaskContext(struct{}{}),
-			0,
-		},
+	go func() {
+		sourceData := task.NewCollection()
+
+		// imagine you have a huge data set to load in
+		for i := 0; i < 1000000; i++ {
+			sourceData.Append(i)
+		}
+
+		// and it takes ages
+		<-time.After(delay)
+
+		job.Tasks(
+			&task.Task{
+				task.SHORT,
+				task.BASE,
+				"exampleFunc",
+				*sourceData,
+				task.Collection{0},
+				task.NewTaskContext(struct{}{}),
+				0,
+			},
+		)
+
+		job.Stacks("core.ExampleTask.Mapper", "core.ExampleTask.Reducer")
+
+		bg.Mount(job)
+	}()
+
+	// this will enable you to return an HTTP call in advance to the loading of data
+	w.Write(
+		[]byte(
+			fmt.Sprintf(
+				"Job[%v] successfully added, you'll be seeing it after %v seconds",
+				job.Id(),
+				delay.Seconds(),
+			),
+		),
 	)
-
-	job.Stacks("core.ExampleTask.Mapper", "core.ExampleTask.Reducer")
-
-	bg.Mount(job)
 }
 
 func ExampleFunc(source *task.Collection,

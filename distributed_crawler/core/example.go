@@ -12,7 +12,7 @@ import (
 )
 
 // The following example shows how to collect HTML contents from the given urls
-func ExampleJobHandler(w http.ResponseWriter, r *http.Request) *task.Job {
+func ExampleJobHandler(w http.ResponseWriter, r *http.Request, bg *task.Background) {
 	var (
 		job  = task.MakeJob()
 		path = "./data.csv"
@@ -34,7 +34,8 @@ func ExampleJobHandler(w http.ResponseWriter, r *http.Request) *task.Job {
 		task.Collection{},
 		task.NewTaskContext(struct{}{}), 0})
 	job.Stacks("core.ExampleTask.Mapper", "core.ExampleTask.Reducer")
-	return job
+
+	bg.Mount(job)
 }
 
 func ExampleFunc(source *task.Collection,
