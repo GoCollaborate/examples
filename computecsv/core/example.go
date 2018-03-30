@@ -43,6 +43,8 @@ func ExampleJobHandler(w http.ResponseWriter, r *http.Request, bg *task.Backgrou
 	job.Stacks("core.ExampleTask.Mapper", "core.ExampleTask.Reducer")
 
 	bg.Mount(job)
+
+	w.Write([]byte(fmt.Sprintf("The Job %v Has Been Executed", job.Id())))
 }
 
 func ExampleFunc(source *task.Collection,

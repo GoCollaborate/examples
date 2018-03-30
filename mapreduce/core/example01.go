@@ -26,6 +26,8 @@ func ExampleJobHandler01(w http.ResponseWriter, r *http.Request, bg *task.Backgr
 		"core.ExampleTask.SimpleReducer", "core.ExampleTask.SimpleMapper",
 		"core.ExampleTask.SimpleReducer")
 	bg.Mount(job)
+
+	w.Write([]byte(fmt.Sprintf("The Job %v Has Been Executed", job.Id())))
 }
 
 func ExampleFunc(source *task.Collection,

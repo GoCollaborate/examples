@@ -44,7 +44,7 @@ func ExampleJobHandler(w http.ResponseWriter, r *http.Request, bg *task.Backgrou
 	w.Write(
 		[]byte(
 			fmt.Sprintf(
-				"Job[%v] successfully added, you'll be seeing it after %v seconds",
+				"Job %v is successfully added, you'll be seeing it after %v seconds",
 				job.Id(),
 				delay.Seconds(),
 			),

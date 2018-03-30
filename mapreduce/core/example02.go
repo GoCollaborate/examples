@@ -66,6 +66,8 @@ func ExampleJobHandler02(w http.ResponseWriter, r *http.Request, bg *task.Backgr
 	job.Stacks("core.ExampleTask.AdvancedMapper", "core.ExampleTask.AdvancedReducer", "core.ExampleTask.AdvancedReducer")
 
 	bg.Mount(job)
+
+	w.Write([]byte(fmt.Sprintf("The Job %v Has Been Executed", job.Id())))
 }
 
 type AdvancedMapper int
