@@ -3,7 +3,7 @@ package core
 import (
 	"fmt"
 	"github.com/GoCollaborate/src/artifacts/task"
-	"github.com/GoCollaborate/src/wrappers/taskHelper"
+	"github.com/GoCollaborate/src/helpers/taskHelper"
 	"net/http"
 )
 
